@@ -29,10 +29,9 @@ pipeline {
                     ls -la
                     node --version
                     npm -v
-                    npm ci
-                    npm run build
-                    ls -la
+                    echo $WORKSPACE
                 '''
+                echo "${WORKSPACE}"
             }
         }
     }
