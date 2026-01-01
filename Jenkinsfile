@@ -29,9 +29,9 @@ pipeline {
                     ls -la
                     node --version
                     npm -v
-                    echo $NPM_CACHE
+                    npm config get cache
                 '''
-                echo "${NPM_CACHE}"
+                
             }
         }
     }
