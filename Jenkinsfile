@@ -29,9 +29,9 @@ pipeline {
                     ls -la
                     node --version
                     npm -v
-                    echo $WORKSPACE
+                    echo $NPM_CACHE
                 '''
-                echo "${PATH}"
+                echo "${NPM_CACHE}"
             }
         }
     }
