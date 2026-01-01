@@ -1,24 +1,22 @@
 pipeline {
-    agent any
+    agent {
+        docker {
+            image 'node:18-alpine'
+            reuseNode true
+        }
+    }
 
     stages {
-        stage('Build') {
-            agent{
-                docker {
-                    image 'node:18-alpine'
-                    reuseNode true
-                }
-            }
+        stage('Clean npm') {
             steps {
                 sh '''
                     ls -la
-                    node --version
-                    npm --version
-                    npm ci
-                    npm run build
-                    ls -la
+                    if [-f node_modules]; then
+                        echo "Find node_modules"
+                    fi
                 '''
             }
         }
+        
     }
 }
