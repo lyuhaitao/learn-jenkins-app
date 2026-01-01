@@ -15,7 +15,6 @@ pipeline {
                     if [ -d "node_modules" ]; then
                         echo "node_modules directory exists"
                         rm -rf node_modules
-                        rm -rf package-lock.json
                         npm cache clean --force
                     else
                         echo "node_modules directory NOT found"
