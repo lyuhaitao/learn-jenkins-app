@@ -25,6 +25,14 @@ pipeline {
         stage('Install dependencies') {
             steps {
                 echo "Start to install dependencies."
+                sh '''
+                    ls -la
+                    node --version
+                    npm -v
+                    npm ci
+                    npm run build
+                    ls -la
+                '''
             }
         }
     }
