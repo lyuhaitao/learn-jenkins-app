@@ -11,12 +11,13 @@ pipeline {
             steps {
                 sh '''
                     ls -la
-                    if [-f node_modules]; then
-                        echo "Find node_modules"
+                    if [ -d "node_modules" ]; then
+                        echo "node_modules directory exists"
+                    else
+                        echo "node_modules directory NOT found"
                     fi
                 '''
             }
         }
-        
     }
 }
