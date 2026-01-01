@@ -31,6 +31,7 @@ pipeline {
                     node --version
                     npm -v
                     npm config get cache
+                    npm ci
                 '''
                 
             }
