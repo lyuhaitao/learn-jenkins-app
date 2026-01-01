@@ -31,7 +31,7 @@ pipeline {
                     npm -v
                     echo $WORKSPACE
                 '''
-                echo "${WORKSPACE}"
+                echo "${PATH}"
             }
         }
     }
