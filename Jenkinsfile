@@ -32,6 +32,8 @@ pipeline {
                     npm -v
                     npm config get cache
                     npm ci
+                    npm run build
+                    ls -la
                 '''
                 
             }
