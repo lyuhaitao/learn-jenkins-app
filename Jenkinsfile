@@ -1,32 +1,26 @@
 pipeline {
-    agent {
-        docker {
-            image 'node:18-alpine'
-            args '-v /var/lib/jenkins/.npm:/.npm'
-            reuseNode true
-        }
-    }
+    agent any
 
     stages {
-        stage('Clean npm') {
+        stage('Build') {
+            agent {
+                docker {
+                    image 'node:18-alpine'
+                    args '-v /var/lib/jenkins/.npm:/.npm'
+                    reuseNode true
+                }
+            }
             steps {
                 sh '''
                     ls -la
                     if [ -d "node_modules" ]; then
-                        echo "node_modules directory exists"
+                        echo "node_modules directory exists - Remove old node-modules"
                         rm -rf node_modules
                         npm cache clean --force
                     else
                         echo "node_modules directory NOT found"
                     fi
-                '''
-            }
-        }
-        stage('Install dependencies') {
-            steps {
-                echo "Start to install dependencies."
-                sh '''
-                    ls -la
+                    echo "Start to install dependencies."
                     node --version
                     npm -v
                     npm config get cache
@@ -34,17 +28,74 @@ pipeline {
                     npm run build
                     ls -la
                 '''
-                
             }
         }
+        
         stage('Test Stage') {
-            steps {
-                sh '''
-                    test -f build/index.html
-                    npm test
-                '''
+            parallel {
+                stage ('Unit tests'){
+                    agent {
+                        docker {
+                            image 'node:18-alpine'
+                            reuseNode true
+                        }
+                    }
+
+                    steps {
+                        sh '''
+                            #test -f build/index.html
+                            npm test
+                        '''
+                    }
+                    post {
+                        always {
+                            junit 'jest-results/junit.xml'
+                        }
+                    }
+
+                }
+                stage ('E2E') {
+                    agent {
+                        docker {
+                            image 'mcr.microsoft.com/playwright:v1.39.0-jammy'
+                            reuseNode true
+                        }
+                    }
+
+                    steps {
+                        sh '''
+                            npm install serve
+                            node_modules/.bin/serve -s build &
+                            sleep 10
+                            npx playwright test  --reporter=html
+                        '''
+                    }
+
+                    post {
+                        always {
+                            publishHTML([allowMissing: false, alwaysLinkToLastBuild: false, keepAll: false, reportDir: 'playwright-report', reportFiles: 'index.html', reportName: 'Playwright HTML Report', reportTitles: '', useWrapperFileDirectly: true])
+                        }
+                    }
+
+                }
             }
             
+        }
+
+        stage ('Deploy') {
+            agent {
+                docker {
+                    image 'node:18-alpine'
+                    reuseNode true
+                }
+            }
+            steps {
+                sh '''
+                    npm install -g netlify-cli
+                    netlify --version
+                '''
+            }
+
         }
     }
 }
