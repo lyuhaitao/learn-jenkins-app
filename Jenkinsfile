@@ -88,7 +88,7 @@ pipeline {
         stage ('Deploy') {
             agent {
                 docker {
-                    image 'node:18-alpine'
+                    image 'node:18-alpine-jenkins'
                     args '''
                     -v /var/lib/jenkins/.npm:/.npm
                     '''
@@ -102,6 +102,7 @@ pipeline {
                 sh '''
                     ls -la
                     ls -ld /usr/local/lib
+                    echo $WORKSPACE
                     npm install netlify-cli
                     ls -ld node_modules/.bin/netlify
                     node_modules/.bin/netlify -v
