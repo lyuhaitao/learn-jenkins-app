@@ -2,6 +2,7 @@ pipeline {
     agent any
 
     stages {
+        /*
         stage('Build') {
             agent {
                 docker {
@@ -83,7 +84,7 @@ pipeline {
             }
             
         }
-
+        */
         stage ('Deploy') {
             agent {
                 docker {
@@ -96,8 +97,7 @@ pipeline {
                 sh '''
                     npm install  netlify-cli
                     pwd
-					which netlify
-                    #./node_modules/.bin/netlify --version
+                    npx netlify --version
                 '''
             }
 
