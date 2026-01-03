@@ -89,13 +89,14 @@ pipeline {
             agent {
                 docker {
                     image 'node:18-alpine'
+                    args '--user node'
                     reuseNode true
                 }
             }
             steps {
                 sh '''
                     ls -al
-                    npm install -g netlify-cli
+                    #npm install -g netlify-cli
                     pwd
                     #which netlify
                 '''
