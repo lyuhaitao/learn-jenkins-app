@@ -102,7 +102,7 @@ pipeline {
                 sh '''
                     ls -la
                     ls -ld /usr/local/lib
-                    sudo npm install -g netlify-cli
+                    npm install netlify-cli
                     #ls node_modules/.bin
                     #mkdir -p $NPM_CACHE
                     echo $WORKSPACE
