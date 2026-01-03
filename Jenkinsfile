@@ -101,8 +101,9 @@ pipeline {
             steps {
                 sh '''
                     ls -la
-                    npm install -g netlify-cli
-                    ls node_modules/.bin
+                    ls -ld /usr/local/lib
+                    #npm install -g netlify-cli
+                    #ls node_modules/.bin
                     #mkdir -p $NPM_CACHE
                     echo $WORKSPACE
                     
