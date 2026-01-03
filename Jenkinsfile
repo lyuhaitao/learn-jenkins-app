@@ -90,17 +90,15 @@ pipeline {
                 docker {
                     image 'node:18-alpine'
                     args '-v /var/lib/jenkins/.npm:/.npm'
-                    args '--user jenkins'
+                    args '-w /app'
                     reuseNode true
                 }
             }
             steps {
                 sh '''
-                    npm install  netlify-cli
+                    npm install -g netlify-cli
                     pwd
-                    id
-                    whoami
-                    cat /etc/passwd
+                    which netlify
                 '''
             }
 
