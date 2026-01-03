@@ -91,7 +91,6 @@ pipeline {
                     image 'node:18-alpine-jenkins'
                     args '''
                     -v /var/lib/jenkins/.npm:/.npm
-                    -v /var/lib/jenkins/tmp:/usr/local/lib
                     '''
                     reuseNode true
                 }
@@ -105,7 +104,7 @@ pipeline {
                     ls -ld /usr/local/lib
                     echo $WORKSPACE
                     npm install -g netlify-cli
-                    ls -ld /usr/local/lib
+                    ls -ld /usr/local/bin
                     #ls -ld node_modules/.bin/netlify
                     #node_modules/.bin/netlify -v
                     echo $WORKSPACE
