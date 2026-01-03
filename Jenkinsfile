@@ -89,6 +89,9 @@ pipeline {
             agent {
                 docker {
                     image 'node:18-alpine'
+                    args '''
+                    -v /var/lib/jenkins/.npm:/.npm
+                    '''
                     reuseNode true
                 }
             }
