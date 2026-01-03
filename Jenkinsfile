@@ -98,9 +98,10 @@ pipeline {
             steps {
                 sh '''
                     ls -la
-                    mkdir -p $NPM_CACHE
+                    ls node_modules
+                    #mkdir -p $NPM_CACHE
                     echo $WORKSPACE
-                    ls -la
+                    
                 '''
             }
 
