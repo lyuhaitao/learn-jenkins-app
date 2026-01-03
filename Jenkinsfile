@@ -97,7 +97,9 @@ pipeline {
                 sh '''
                     npm install  netlify-cli
                     pwd
-                    npx netlify --version
+                    id
+                    whoami
+                    cat /etc/passwd
                 '''
             }
 
