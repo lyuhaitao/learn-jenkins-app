@@ -2,7 +2,7 @@ pipeline {
     agent any
 
     stages {
-        /*
+        
         stage('Build') {
             agent {
                 docker {
@@ -84,7 +84,7 @@ pipeline {
             }
             
         }
-        */
+        
         stage ('Deploy') {
             agent {
                 docker {
@@ -98,7 +98,6 @@ pipeline {
                 sh '''
                     ls -la
                     echo $WORKSPACE
-                    ls /.npm
                     npm install -g netlify-cli
                     ls -ld /usr/local/bin
                     netlify -v
