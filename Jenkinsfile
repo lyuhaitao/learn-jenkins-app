@@ -89,28 +89,20 @@ pipeline {
             agent {
                 docker {
                     image 'node:18-alpine-jenkins'
-                    args '''
-                    -v /var/lib/jenkins/.npm:/.npm
-                    '''
+                    
                     reuseNode true
                 }
             }
-            environment {
-                NPM_CACHE = "/var/lib/jenkins/.npm"
-            }
+            
             steps {
                 sh '''
                     ls -la
-                    ls -ld /usr/local/lib
                     echo $WORKSPACE
                     npm install -g netlify-cli
                     ls -ld /usr/local/bin
-                    echo "----------------------------"
                     netlify -v
-                    echo "----------------------------"
                     #ls -ld node_modules/.bin/netlify
                     #node_modules/.bin/netlify -v
-                    echo $WORKSPACE
                     
                 '''
             }
