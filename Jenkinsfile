@@ -91,6 +91,7 @@ pipeline {
                     image 'node:18-alpine-jenkins'
                     args '''
                     -v /var/lib/jenkins/.npm:/.npm
+                    -v /var/lib/jenkins/tmp:/usr/local/lib
                     '''
                     reuseNode true
                 }
