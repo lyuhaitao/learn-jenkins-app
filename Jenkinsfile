@@ -89,9 +89,6 @@ pipeline {
             agent {
                 docker {
                     image 'node:18-alpine'
-                    args '''
-                        --user node
-                    '''
                     reuseNode true
                 }
             }
