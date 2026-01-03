@@ -90,6 +90,7 @@ pipeline {
                 docker {
                     image 'node:18-alpine'
                     args '-v /var/lib/jenkins/.npm:/.npm'
+                    args '--user jenkins'
                     reuseNode true
                 }
             }
