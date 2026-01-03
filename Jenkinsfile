@@ -103,10 +103,10 @@ pipeline {
                     ls -la
                     ls -ld /usr/local/lib
                     echo $WORKSPACE
-                    npm install netlify-cli
-                    ls -ld node_modules/.bin/netlify
-                    node_modules/.bin/netlify -v
-                    #mkdir -p $NPM_CACHE
+                    npm install -g netlify-cli
+                    ls -ld $(which netlify)
+                    #ls -ld node_modules/.bin/netlify
+                    #node_modules/.bin/netlify -v
                     echo $WORKSPACE
                     
                 '''
