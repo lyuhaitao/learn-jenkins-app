@@ -110,7 +110,7 @@ pipeline {
                     #ls -ld node_modules/.bin/netlify
                     #node_modules/.bin/netlify -v
                     netlify status
-                    netlify deploy --dir=build --prod --build=false
+                    netlify deploy --dir=build --prod 
                 '''
             }
 
