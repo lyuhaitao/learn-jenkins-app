@@ -2,8 +2,8 @@ pipeline {
     agent any
 
     environment {
-        NETLIFY_SITE_ID_LYU = '8d9f72a9-2714-4c1a-a6ae-d33704516c81'
-        NETLIFY_AUTH_TOKEN_LYU = credentials('netlify-token')
+        NETLIFY_SITE_ID = '8d9f72a9-2714-4c1a-a6ae-d33704516c81'
+        NETLIFY_AUTH_TOKEN = credentials('netlify-token')
     }
 
     stages {
@@ -109,6 +109,7 @@ pipeline {
                     #ls -ld node_modules/.bin/netlify
                     #node_modules/.bin/netlify -v
                     netlify status
+                    netlify deploy --dir=build --prod
                 '''
             }
 
