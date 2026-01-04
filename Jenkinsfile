@@ -11,8 +11,8 @@ pipeline {
         stage('Build') {
             agent {
                 docker {
-                    image 'node:18-alpine'
-                    args '-v /var/lib/jenkins/.npm:/.npm'
+                    image 'node:18-alpine-jenkins'
+                    // args '-v /var/lib/jenkins/.npm:/.npm'
                     reuseNode true
                 }
             }
@@ -42,8 +42,8 @@ pipeline {
                 stage ('Unit tests'){
                     agent {
                         docker {
-                            image 'node:18-alpine'
-                            args '-v /var/lib/jenkins/.npm:/.npm'
+                            image 'node:18-alpine-jenkins'
+                            // args '-v /var/lib/jenkins/.npm:/.npm'
                             reuseNode true
                         }
                     }
