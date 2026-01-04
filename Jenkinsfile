@@ -102,7 +102,6 @@ pipeline {
             steps {
                 sh '''
                     ls -la
-                    apk add --no-cache bash
                     ls -la /bin
                     echo $WORKSPACE
                     npm install -g netlify-cli
@@ -111,7 +110,7 @@ pipeline {
                     #ls -ld node_modules/.bin/netlify
                     #node_modules/.bin/netlify -v
                     netlify status
-                    netlify deploy --dir=build --prod
+                    netlify deploy --dir=build --prod --build=false
                 '''
             }
 
